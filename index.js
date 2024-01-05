@@ -14,7 +14,12 @@ const results = [];
 
 
 fs.createReadStream('kepler_data.csv')
-    .pipe(parse()) //pipe function connects a readable stream source to a writable stream destination.
+    .pipe(parse({
+        comment: '#',
+        columns: true, // this returns each row as a js object with key:value pairs
+    })) 
+    
+    //pipe function connects a readable stream source to a writable stream destination.
     .on('data', (data) => {
         results.push(data);
     })
